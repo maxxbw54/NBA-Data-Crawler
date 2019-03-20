@@ -7,14 +7,13 @@
    date:        3/11/19
 -------------------------------------------------
 """
-from utils.html_util import *
+from utils.html_util_task1 import *
 from utils.time_util import get_current_time
 from bs4 import BeautifulSoup
 from path_config import data_dir
 import os
 import csv
-from utils.team_name_util import team_name_dict
-
+from utils.team_name_util import team_name_dict, target_team_name_dict
 
 def write_dict(player_dict, dict_fpath):
     with open(dict_fpath, 'a+') as f:
@@ -82,7 +81,7 @@ for year in range(1984, 2020, 1):
         player_dict = dict()
 
         url = 'https://basketball.realgm.com/nba/teams/Random/%s/Transaction_History/%s' % (team_id, year)
-        # url = 'https://basketball.realgm.com/nba/teams/Oklahoma-City-Thunder/33/Transaction_History/2017'
+        # url = 'https://basketball.realgm.com/nba/teams/Random/23/Transaction_History/2019'
         print("Current url %s..." % url, get_current_time())
         html_content = get_html(url)
 
@@ -93,6 +92,9 @@ for year in range(1984, 2020, 1):
         soup = BeautifulSoup(html_content, "html.parser")
 
         season_year, team_name = get_team_info(soup)
+
+        if team_name not in target_team_name_dict:
+            continue
 
         # 1. free_agency
         player_dict = get_free_agency(soup, season_year, team_name, player_dict, url)

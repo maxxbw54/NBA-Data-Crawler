@@ -7,7 +7,7 @@
    date:        3/11/19
 -------------------------------------------------
 """
-from data_structure.player import Player
+from data_structure.player1 import Player
 
 
 def get_html(url):
@@ -24,13 +24,10 @@ def get_free_agency(soup, season_year, team_name, player_dict, url):
                 date = fa.text.strip().split('\n')[0].strip()
                 player_name = fa.text.strip().split('\n')[1].strip()
                 if player_name in player_dict:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)].free_agency_date = date
+                    player_dict[player_name].free_agency_date = date
                 else:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)] = Player(name=player_name,
-                                                                                             year=season_year,
-                                                                                             team=team_name,
-                                                                                             free_agency_date=date,
-                                                                                             url=url)
+                    player_dict[player_name] = Player(name=player_name, year=season_year, team=team_name,
+                                                      free_agency_date=date, url=url)
                 cnt += 1
             break
     print("# free agency player %s" % cnt)
@@ -45,13 +42,13 @@ def get_team_options_exercised(soup, season_year, team_name, player_dict, url):
                 date = fa.text.strip().split('\n')[0].strip()
                 player_name = fa.text.strip().split('\n')[1].strip()
                 if player_name in player_dict:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)].team_options_exercised = date
+                    player_dict[player_name].team_options_exercised = date
                 else:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)] = Player(name=player_name,
-                                                                                             year=season_year,
-                                                                                             team=team_name,
-                                                                                             team_options_exercised=date,
-                                                                                             url=url)
+                    player_dict[player_name] = Player(name=player_name,
+                                                      year=season_year,
+                                                      team=team_name,
+                                                      team_options_exercised=date,
+                                                      url=url)
                 cnt += 1
             break
     print("# Team Options Exercised %s" % cnt)
@@ -66,13 +63,13 @@ def get_trade_acquisitions(soup, season_year, team_name, player_dict, url):
                 date = fa.text.strip().split('\n')[0].strip()
                 player_name = fa.text.strip().split('\n')[1].strip()
                 if player_name in player_dict:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)].trade_acquisitions = date
+                    player_dict[player_name].trade_acquisitions = date
                 else:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)] = Player(name=player_name,
-                                                                                             year=season_year,
-                                                                                             team=team_name,
-                                                                                             trade_acquisitions=date,
-                                                                                             url=url)
+                    player_dict[player_name] = Player(name=player_name,
+                                                      year=season_year,
+                                                      team=team_name,
+                                                      trade_acquisitions=date,
+                                                      url=url)
                 cnt += 1
             break
     print("# Trade Acquisitions %s" % cnt)
@@ -87,13 +84,13 @@ def get_players_waived(soup, season_year, team_name, player_dict, url):
                 date = fa.text.strip().split('\n')[0].strip()
                 player_name = fa.text.strip().split('\n')[1].strip()
                 if player_name in player_dict:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)].players_waived = date
+                    player_dict[player_name].players_waived = date
                 else:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)] = Player(name=player_name,
-                                                                                             year=season_year,
-                                                                                             team=team_name,
-                                                                                             players_waived=date,
-                                                                                             url=url)
+                    player_dict[player_name] = Player(name=player_name,
+                                                      year=season_year,
+                                                      team=team_name,
+                                                      players_waived=date,
+                                                      url=url)
                 cnt += 1
             break
     print("# Players Waived %s" % cnt)
@@ -109,14 +106,13 @@ def get_veteran_scale_extension(soup, season_year, team_name, player_dict, url):
                 veteran_team_name = fa.text.strip().split('signed a veteran extension with the')[1] \
                     .replace('.', '').strip()
                 if player_name in player_dict:
-                    player_dict[
-                        '%s-%s-%s' % (season_year, team_name, player_name)].veteran_scale_extension = veteran_team_name
+                    player_dict[player_name].veteran_scale_extension = veteran_team_name
                 else:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)] = Player(name=player_name,
-                                                                                             year=season_year,
-                                                                                             team=team_name,
-                                                                                             veteran_scale_extension=veteran_team_name,
-                                                                                             url=url)
+                    player_dict[player_name] = Player(name=player_name,
+                                                      year=season_year,
+                                                      team=team_name,
+                                                      veteran_scale_extension=veteran_team_name,
+                                                      url=url)
                 cnt += 1
     print("# Veteran Scale Extension %s" % cnt)
     return player_dict
@@ -131,14 +127,13 @@ def get_rookie_scale_extension(soup, season_year, team_name, player_dict, url):
                 rookie_scale_extension_team_name = fa.text.strip().split('signed a rookie scale extension with the')[
                     1].replace('.', '').strip()
                 if player_name in player_dict:
-                    player_dict['%s-%s-%s' % (
-                        season_year, team_name, player_name)].rookie_scale_extension = rookie_scale_extension_team_name
+                    player_dict[player_name].rookie_scale_extension = rookie_scale_extension_team_name
                 else:
-                    player_dict['%s-%s-%s' % (season_year, team_name, player_name)] = Player(name=player_name,
-                                                                                             year=season_year,
-                                                                                             team=team_name,
-                                                                                             rookie_scale_extension=rookie_scale_extension_team_name,
-                                                                                             url=url)
+                    player_dict[player_name] = Player(name=player_name,
+                                                      year=season_year,
+                                                      team=team_name,
+                                                      rookie_scale_extension=rookie_scale_extension_team_name,
+                                                      url=url)
                 cnt += 1
     print("# Rookie Scale Extension %s" % cnt)
     return player_dict
