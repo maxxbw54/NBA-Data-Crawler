@@ -19,12 +19,11 @@ def get_html(url):
 def get_season_year(year_soup, team_name):
     for h2 in year_soup.findAll("h2"):
         season_year = h2.text.replace(team_name, '').replace('Roster Turnover', '').strip()
-        from_year = season_year.split(' to ')[0]
-        to_year = season_year.split(' to ')[1].split(' ')[0]
-        return from_year + ' to ' + to_year
+        return season_year.split(' to ')[0].split('-')[1]
 
 
 def get_lost(table_soup, season_year, team_name, player_dict, url):
+    from utils.team_name_util2 import target_full_to_abbr_dict
     cnt = 0
     for td in table_soup.findAll("td"):
         player_name = None
@@ -40,22 +39,24 @@ def get_lost(table_soup, season_year, team_name, player_dict, url):
 
         if player_name is None:
             continue
+
         for li in td.findAll("li"):
             s = li.text
-            if 'Free Agent' in s:
+            if 'Free Agent' in s and any(team_name_abbr in s for team_name_abbr in target_full_to_abbr_dict[team_name]):
                 free_agent_date = s.split(' on ')[1].strip()
                 if_valid = True
-            if 'Signed Contract' in s and destination_team is None:
+            if 'Signed Contract' in s and any(
+                    team_name_abbr in s for team_name_abbr in target_full_to_abbr_dict[team_name]):
                 if ' to ' in s:
                     destination_team = s[s.find("(") + 1:s.find(")")].split(' to ')[1].strip()
                     if_valid = True
                 else:
                     destination_team = s[s.find("(") + 1:s.find(")")].strip()
                     if_valid = True
-            if 'Waived' in s and waived_date is None:
+            if 'Waived' in s and any(team_name_abbr in s for team_name_abbr in target_full_to_abbr_dict[team_name]):
                 waived_date = s.split(' on ')[1].strip()
                 if_valid = True
-            if 'Traded' in s and traded_team is None:
+            if 'Traded' in s and any(team_name_abbr in s for team_name_abbr in target_full_to_abbr_dict[team_name]):
                 traded_date = s.split(' on ')[1].strip()
                 traded_team = s[s.find("(") + 1:s.find(")")].split('to')[1].strip()
                 if_valid = True
@@ -89,9 +90,7 @@ def get_added(table_soup, season_year, team_name, player_dict, url):
             if 'Signed Contract' in s:
                 sign_contract_date = s.split(' on ')[1].strip()
                 if_valid = True
-            if 'Traded' in s and traded_team is None:
-                traded_date = s.split(' on ')[1].strip()
-                traded_team = s[s.find("(") + 1:s.find(")")].split('to')[1].strip()
+            if 'Traded' in s:
                 if_valid = True
         if if_valid:
             player_dict[player_name] = Player(name=player_name, year=season_year, team=team_name,

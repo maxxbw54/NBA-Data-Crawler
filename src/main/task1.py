@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 from path_config import data_dir
 import os
 import csv
-from utils.team_name_util import team_name_dict, target_team_name_dict
+from utils.team_name_util2 import team_name_dict, target_team_name_dict
 
 def write_dict(player_dict, dict_fpath):
     with open(dict_fpath, 'a+') as f:

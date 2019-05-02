@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 from path_config import data_dir
 import os
 import csv
-from utils.team_name_util import team_name_dict, target_team_name_dict
+from utils.team_name_util2 import team_name_dict, target_team_name_dict, target_full_to_abbr_dict
 
 
 def write_dict(player_dict, dict_fpath):
@@ -41,7 +41,9 @@ def write_dict(player_dict, dict_fpath):
                 row.extend(['', ''])
             # 'Destination Team', 'Destination Team Abbreviation'
             if player.destination_team is not None:
-                if player.destination_team not in target_team_name_dict:
+                if not any(player.destination_team in target_full_to_abbr_dict[team_name_full] for team_name_full in
+                           target_full_to_abbr_dict):
+                    print("Skip because %s" % player.destination_team)
                     continue
                 row.extend([player.destination_team, team_name_dict[player.destination_team]])
             else:
@@ -77,6 +79,7 @@ for team_id in range(0, 50, 1):
 
     url = 'https://basketball.realgm.com/nba/teams/random/%s/roster-turnover' % team_id
     # url = 'https://basketball.realgm.com/nba/teams/Oklahoma-City-Thunder/33/roster-turnover'
+    # url = 'https://basketball.realgm.com/nba/teams/random/23/roster-turnover'
     print("Current url %s..." % url, get_current_time())
     html_content = get_html(url)
 

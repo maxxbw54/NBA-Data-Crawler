@@ -10,7 +10,7 @@
 
 name_dict_one_side = {
     'ATL': 'Atlanta Hawks',
-    'BKN': 'Brooklyn Nets',
+    'BRK': 'Brooklyn Nets',
     'BOS': 'Boston Celtics',
     'CHA': 'Charlotte Hornets',
     'CHI': 'Chicago Bulls',
@@ -46,7 +46,7 @@ name_dict_one_side = {
     'SLH': 'St. Louis Hawks',
     'BB': 'Buffalo Braves',
     'NJN': 'New Jersey Nets',
-    'PS': 'Philadelphia Sixers',
+    'PHI': 'Philadelphia Sixers',
     'SS': 'Seattle SuperSonics',
     'WB': 'Washington Bullets',
     'KCK': 'Kansas City Kings',
@@ -73,7 +73,7 @@ for k, v in name_dict_one_side.items():
 
 target_name_dict_one_side = {
     'ATL': 'Atlanta Hawks',
-    'BKN': 'Brooklyn Nets',
+    'BRK': 'Brooklyn Nets',
     'BOS': 'Boston Celtics',
     'CHA': 'Charlotte Hornets',
     'CHI': 'Chicago Bulls',
@@ -94,7 +94,7 @@ target_name_dict_one_side = {
     'NYK': 'New York Knicks',
     'OKC': 'Oklahoma City Thunder',
     'ORL': 'Orlando Magic',
-    'PHI': 'Philadelphia 76ers',
+    'PHI': 'Philadelphia Sixers',
     'PHX': 'Phoenix Suns',
     'POR': 'Portland Trail Blazers',
     'SAC': 'Sacramento Kings',
@@ -109,7 +109,7 @@ target_name_dict_one_side = {
     # 'SLH': 'St. Louis Hawks',
     # 'BB': 'Buffalo Braves',
     'NJN': 'New Jersey Nets',
-    'PS': 'Philadelphia Sixers',
+    'PHI': 'Philadelphia Sixers',
     # 'SS': 'Seattle SuperSonics',
     # 'WB': 'Washington Bullets',
     # 'KCK': 'Kansas City Kings',
@@ -130,3 +130,38 @@ target_team_name_dict = dict()
 for k, v in target_name_dict_one_side.items():
     target_team_name_dict[k] = v
     target_team_name_dict[v] = k
+
+target_full_to_abbr_dict = {
+    'Atlanta Hawks': ['ATL'],
+    'Brooklyn Nets': ['BRK', 'NJN'],
+    'Boston Celtics': ['BOS'],
+    'Charlotte Hornets': ['CHA'],
+    'Chicago Bulls': ['CHI'],
+    'Cleveland Cavaliers': ['CLE'],
+    'Dallas Mavericks': ['DAL'],
+    'Denver Nuggets': ['DEN'],
+    'Detroit Pistons': ['DET'],
+    'Golden State Warriors': ['GSW'],
+    'Houston Rockets': ['HOU'],
+    'Indiana Pacers': ['IND'],
+    'Los Angeles Clippers': ['LAC', 'SDC'],
+    'Los Angeles Lakers': ['LAL'],
+    'Memphis Grizzlies': ['MEM', 'VAN'],
+    'Miami Heat': ['MIA'],
+    'Milwaukee Bucks': ['MIL'],
+    'Minnesota Timberwolves': ['MIN'],
+    'New Orleans Pelicans': ['NOP', 'CHA'],
+    'New York Knicks': ['NYK'],
+    'Oklahoma City Thunder': ['OKC', 'SEA'],
+    'Orlando Magic': ['ORL'],
+    'Philadelphia Sixers': ['PHI'],
+    'Phoenix Suns': ['PHX'],
+    'Portland Trail Blazers': ['POR'],
+    'Sacramento Kings': ['SAC', 'KCK'],
+    'San Antonio Spurs': ['SAS'],
+    'Toronto Raptors': ['TOR'],
+    'Utah Jazz': ['UTA'],
+    'Washington Wizards': ['WAS'],
+    'New Jersey Nets': ['BRK', 'NJN'],
+    # 'Philadelphia Sixers': ['PS']
+}
